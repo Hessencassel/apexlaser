@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Received | Apex Laser Cleaning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark:  #0A0A0E;
+      --laser:    #00C8FF;
+      --ember:    #FF4220;
+      --text:     #EDE9E1;
+      --muted:    #66667A;
+      --border:   rgba(255,255,255,0.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    .check-ring {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      border: 2px solid var(--laser);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      animation: popIn 0.5s ease-out forwards;
+    }
+    .check-ring svg { width: 32px; height: 32px; }
+    @keyframes popIn {
+      from { transform: scale(0.6); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--laser);
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+    p {
+      color: var(--muted);
+      max-width: 440px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    a {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      background: var(--ember);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      transition: background 0.2s;
+    }
+    a:hover { background: #d93616; }
+  </style>
+</head>
+<body>
+  <div class="check-ring">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 16L13 23L26 9" stroke="#00C8FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <p class="eyebrow">Quote Request Received</p>
+  <h1>We Got It.</h1>
+  <p>Thanks for reaching out. We'll review your project details and get back to you with transparent pricing within one business day — usually sooner.</p>
+  <a href="/">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,14 @@
+[build]
+  publish = "."
+
+# Redirect form submissions to the success page
+[[redirects]]
+  from = "/success"
+  to   = "/success.html"
+  status = 200
+
+# Clean URLs — serve index.html for root
+[[redirects]]
+  from = "/"
+  to   = "/index.html"
+  status = 200
