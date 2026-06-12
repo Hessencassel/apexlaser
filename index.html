@@ -225,7 +225,7 @@
     .hero-content {
       position: relative;
       z-index: 5;
-      max-width: 880px;
+      max-width: 580px;
     }
 
     /* Zone marker — blueprint section callout */
@@ -909,13 +909,166 @@
     }
 
     /* ============================================
+       IMAGES
+    ============================================ */
+
+    /* Hero image panel — right side */
+    .hero-img-panel {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 42%;
+      overflow: hidden;
+      z-index: 2;
+    }
+    .hero-img-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--bg) 0%, rgba(7,21,36,0.55) 35%, transparent 70%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-img-panel::after {
+      content: 'IMG-001 // ACTIVE_SERVICE';
+      position: absolute;
+      bottom: 96px; left: 0;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bp);
+      background: rgba(7,21,36,0.82);
+      padding: 4px 12px;
+      z-index: 3;
+      border-top: 1px solid var(--border2);
+      border-right: 1px solid var(--border2);
+    }
+    .hero-img-panel img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.6;
+      display: block;
+    }
+
+    /* Visual results grid */
+    .results-section { background: var(--bg); }
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border2);
+    }
+    .result-card {
+      background: var(--bg3);
+      overflow: hidden;
+    }
+    .result-card img {
+      width: 100%; height: 260px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.85);
+      transition: filter 0.3s;
+    }
+    .result-card:hover img { filter: brightness(1); }
+    .result-card-label {
+      padding: 0.8rem 1.25rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text2);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .result-card-label::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--bp);
+      flex-shrink: 0;
+    }
+    .result-card.after .result-card-label::before { background: var(--amber); }
+
+    /* Process card image headers */
+    .proc-img {
+      width: 100%; height: 170px;
+      object-fit: cover;
+      display: block;
+      opacity: 0.72;
+      filter: brightness(0.82);
+      border-bottom: 1px solid var(--border2);
+      transition: filter 0.3s, opacity 0.3s;
+      margin-bottom: 0;
+    }
+    .proc-card:hover .proc-img { filter: brightness(1); opacity: 0.88; }
+    .proc-card-body { padding: 2.5rem 2.1rem; position: relative; }
+
+    /* Service card image header */
+    .svc-img {
+      width: 100%; height: 150px;
+      object-fit: cover;
+      display: block;
+      opacity: 0.7;
+      filter: brightness(0.82);
+      border-bottom: 1px solid var(--border2);
+      transition: filter 0.3s;
+    }
+    .svc-card:hover .svc-img { filter: brightness(1); opacity: 0.9; }
+    .svc-card-body { padding: 2.4rem 2.1rem; }
+
+    /* Industry card image */
+    .ind-img {
+      width: 100%; height: 120px;
+      object-fit: cover;
+      display: block;
+      opacity: 0.7;
+      filter: brightness(0.8) saturate(0.85);
+      border-bottom: 1px solid var(--border2);
+      transition: filter 0.3s;
+    }
+    .ind-card:hover .ind-img { filter: brightness(0.95) saturate(1); }
+
+    /* Shop image in contact column */
+    .shop-img-block {
+      border: 1px solid var(--border2);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .shop-img-block img {
+      width: 100%; height: 210px;
+      object-fit: cover;
+      display: block;
+      opacity: 0.72;
+      filter: brightness(0.8);
+    }
+    .shop-img-block-label {
+      padding: 7px 12px;
+      background: rgba(7,21,36,0.9);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bp);
+      border-top: 1px solid var(--border2);
+    }
+
+    /* ============================================
        RESPONSIVE
     ============================================ */
     @media (max-width: 920px) {
+      .hero-img-panel { display: none; }
+      .hero-content { max-width: 100%; }
       .services-grid  { grid-template-columns: repeat(2, 1fr); }
       .comparison-grid { grid-template-columns: 1fr; }
       .perf-row       { grid-template-columns: repeat(2, 1fr); }
       .process-grid   { grid-template-columns: 1fr; }
+      .results-grid   { grid-template-columns: 1fr; }
       .ind-grid       { grid-template-columns: repeat(2, 1fr); }
       .contact-wrap   { grid-template-columns: 1fr; gap: 3.5rem; }
       .footer-body    { flex-wrap: wrap; }
@@ -975,6 +1128,11 @@
 
     <div class="cross-h"  aria-hidden="true"></div>
     <div class="cross-v"  aria-hidden="true"></div>
+
+    <!-- Hero image panel -->
+    <div class="hero-img-panel" aria-hidden="true">
+      <img src="images/hero-action.png" alt="">
+    </div>
 
     <!-- Document header / title block bar -->
     <div class="doc-header" aria-hidden="true">
@@ -1086,9 +1244,12 @@
         <p class="svc-desc">Clean engine blocks, axles, and equipment of built-up grime and oxidation — ready for inspection, repair, or recoating.</p>
       </div>
       <div class="svc-card">
-        <div class="svc-partno">PART NO. SVC-005 // WELD & FAB</div>
-        <div class="svc-name">Surface Prep &amp; Weld Cleanup</div>
-        <p class="svc-desc">Oxide-free surface preparation for welding or coating. Remove heat discoloration and weld spatter in minutes, not hours.</p>
+        <img src="images/weld-prep.png" alt="Laser cleaning a weld seam" class="svc-img">
+        <div class="svc-card-body">
+          <div class="svc-partno">PART NO. SVC-005 // WELD & FAB</div>
+          <div class="svc-name">Surface Prep &amp; Weld Cleanup</div>
+          <p class="svc-desc">Oxide-free surface preparation for welding or coating. Remove heat discoloration and weld spatter in minutes, not hours.</p>
+        </div>
       </div>
       <div class="svc-card">
         <div class="svc-partno">PART NO. SVC-006 // SPECIALTY</div>
@@ -1158,6 +1319,27 @@
     </div>
   </section>
 
+  <!-- ============ VISUAL RESULTS ============ -->
+  <section class="results-section" id="results">
+    <div class="sec-head">
+      <span class="sec-zone">B2</span>
+      <span class="sec-title">VISUAL_EVIDENCE</span>
+      <span class="sec-ref">CONDITION: PRE vs POST TREATMENT</span>
+    </div>
+    <p class="sec-sub">The same steel surface — before and after a single laser pass. No chemicals. No abrasion. No cleanup.</p>
+
+    <div class="results-grid">
+      <div class="result-card">
+        <img src="images/before-rust.png" alt="Heavily corroded steel surface before laser cleaning">
+        <div class="result-card-label">Condition: Pre-Treatment // Iron Oxide Corrosion</div>
+      </div>
+      <div class="result-card after">
+        <img src="images/after-clean.png" alt="Clean bare metal surface after laser cleaning">
+        <div class="result-card-label">Condition: Post-Treatment // Bare_Metal Result</div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ DIFFERENTIATOR BAND ============ -->
   <div class="diff-band">
     <div class="diff-inner">
@@ -1187,10 +1369,13 @@
         <p class="proc-desc">Fill out the quote form or call us. Describe the surface type, approximate size, and condition. Send photos if you have them — we respond with transparent pricing within 24 hours.</p>
       </div>
       <div class="proc-card">
-        <div class="proc-ghost" aria-hidden="true">02</div>
-        <div class="proc-step-id">PROC-002 // DELIVER</div>
-        <div class="proc-title">Shop_or_On-Site</div>
-        <p class="proc-desc">Drop your parts or equipment at our Fort Wayne shop, or we deploy our fully mobile setup to your garage, farm, or job site anywhere in Northeast Indiana — whichever works best for the job.</p>
+        <img src="images/mobile-service.png" alt="Mobile laser cleaning service at a farm" class="proc-img">
+        <div class="proc-card-body">
+          <div class="proc-ghost" aria-hidden="true">02</div>
+          <div class="proc-step-id">PROC-002 // DELIVER</div>
+          <div class="proc-title">Shop_or_On-Site</div>
+          <p class="proc-desc">Drop your parts or equipment at our Fort Wayne shop, or we deploy our fully mobile setup to your garage, farm, or job site anywhere in Northeast Indiana — whichever works best for the job.</p>
+        </div>
       </div>
       <div class="proc-card">
         <div class="proc-ghost" aria-hidden="true">03</div>
@@ -1212,6 +1397,7 @@
 
     <div class="ind-grid">
       <div class="ind-card">
+        <img src="images/automotive.png" alt="Laser cleaning a classic car frame" class="ind-img">
         <div class="ind-class">CLASS IND-001</div>
         <div class="ind-name">Automotive Restoration</div>
         <p class="ind-desc">Strip frames, panels, and components to bare metal without warping thin sheet metal.</p>
@@ -1262,6 +1448,11 @@
         <span class="sec-title">REQUEST_FORM</span>
       </div>
       <p class="sec-sub" style="margin-top:-2rem">We respond to all quote requests within one business day. Same-week service available for most Fort Wayne area jobs.</p>
+
+      <div class="shop-img-block">
+        <img src="images/shop-interior.png" alt="Apex Laser shop interior with laser cleaning machine and workbench">
+        <div class="shop-img-block-label">SHOP // FORT WAYNE, IN // WALK-INS WELCOME</div>
+      </div>
 
       <div class="contact-field">
         <div class="cf-key">Shop Location</div>
