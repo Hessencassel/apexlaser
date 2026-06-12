@@ -6,6 +6,33 @@
   <title>TD//LASER PRO — PROJ:FW-001 — Surface Restoration Services</title>
   <meta name="description" content="TD Laser Pro — Fort Wayne's only dedicated laser cleaning service. Rust removal, paint stripping, surface prep. Shop in Fort Wayne plus mobile service across Northeast Indiana. No chemicals. No abrasives.">
 
+  <meta property="og:title"       content="TD Laser Pro | Fort Wayne Laser Cleaning">
+  <meta property="og:description" content="Fort Wayne's only dedicated laser cleaning service.">
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://tdlaserpro.netlify.app">
+  <meta property="og:image"       content="https://tdlaserpro.netlify.app/Hero%20-%20Main%20Action%20Shot.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "TD Laser Pro",
+    "description": "Fort Wayne's dedicated laser cleaning service",
+    "url": "https://tdlaserpro.netlify.app",
+    "telephone": "(260) 555-0100",
+    "email": "info@tdlaserpro.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Industrial Dr",
+      "addressLocality": "Fort Wayne",
+      "addressRegion": "IN",
+      "postalCode": "46818"
+    },
+    "openingHours": "Mo-Sa 07:00-18:00",
+    "areaServed": "Northeast Indiana"
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -51,6 +78,17 @@
     /* ============================================
        NAV
     ============================================ */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      width: 0%;
+      height: 2px;
+      background: #5AABFF;
+      box-shadow: 0 0 6px #5AABFF;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -176,6 +214,13 @@
       justify-content: center;
       padding: 128px 5% 100px;
       overflow: hidden;
+    }
+
+    #hero-particles {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
     }
 
     /* Large faint centerlines — blueprint registration */
@@ -1166,6 +1211,52 @@
     }
 
     /* ============================================
+       CALL BUTTON
+    ============================================ */
+    .call-btn {
+      position: fixed;
+      bottom: calc(2rem + 36px + 0.5rem);
+      right: 5%;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0 0.9rem;
+      height: 36px;
+      background: var(--amber);
+      color: #071524;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 1px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, background 0.2s;
+    }
+    .call-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 1px;
+      animation: cta-pulse 4s ease-out infinite;
+      pointer-events: none;
+    }
+    .call-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .call-btn:hover { background: #f5c52a; }
+    .call-btn svg   { flex-shrink: 0; display: block; }
+
+    @media (max-width: 600px) {
+      .call-btn            { padding: 0 0.7rem; gap: 0; }
+      .call-btn-text       { display: none; }
+    }
+
+    /* ============================================
        BACK TO TOP
     ============================================ */
     .back-to-top {
@@ -1355,6 +1446,8 @@
 </head>
 <body>
 
+  <div id="scroll-progress" aria-hidden="true"></div>
+
   <!-- ============ NAV ============ -->
   <nav id="nav">
     <a href="#home" class="nav-logo">TD<span class="slash">//</span>LASER PRO</a>
@@ -1380,6 +1473,8 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="home">
+
+    <canvas id="hero-particles" aria-hidden="true"></canvas>
 
     <div class="cross-h"  aria-hidden="true"></div>
     <div class="cross-v"  aria-hidden="true"></div>
@@ -1500,7 +1595,7 @@
         <p class="svc-desc">Clean engine blocks, axles, and equipment of built-up grime and oxidation — ready for inspection, repair, or recoating.</p>
       </div>
       <div class="svc-card">
-        <img src="Weld%20Prep.png" alt="Laser cleaning a weld seam" class="svc-img">
+        <img src="Weld%20Prep.png" alt="Laser cleaning a weld seam" class="svc-img" loading="lazy">
         <div class="svc-card-body">
           <div class="svc-partno">PART NO. SVC-005 // WELD & FAB</div>
           <div class="svc-name">Surface Prep &amp; Weld Cleanup</div>
@@ -1586,11 +1681,11 @@
 
     <div class="ba-slider" id="ba-slider" role="img" aria-label="Before and after laser cleaning comparison — drag to reveal">
       <div class="ba-after">
-        <img src="After%20Shot%20Clean%20Bare%20Metal.png" alt="Clean bare metal surface after laser cleaning">
+        <img src="After%20Shot%20Clean%20Bare%20Metal.png" alt="Clean bare metal surface after laser cleaning" loading="lazy">
         <div class="ba-lbl ba-lbl-after">Post-Treatment // Bare_Metal Result</div>
       </div>
       <div class="ba-before">
-        <img src="Before%20Shot%20%E2%80%94%20Rusted%20Metal.png" alt="Heavily corroded steel surface before laser cleaning">
+        <img src="Before%20Shot%20%E2%80%94%20Rusted%20Metal.png" alt="Heavily corroded steel surface before laser cleaning" loading="lazy">
         <div class="ba-lbl ba-lbl-before">Pre-Treatment // Iron Oxide Corrosion</div>
       </div>
       <div class="ba-divider" id="ba-divider">
@@ -1633,7 +1728,7 @@
         <p class="proc-desc">Fill out the quote form or call us. Describe the surface type, approximate size, and condition. Send photos if you have them — we respond with transparent pricing within 24 hours.</p>
       </div>
       <div class="proc-card">
-        <img src="Mobile%20Service%20On-Site.png" alt="Mobile laser cleaning service at a farm" class="proc-img">
+        <img src="Mobile%20Service%20On-Site.png" alt="Mobile laser cleaning service at a farm" class="proc-img" loading="lazy">
         <div class="proc-card-body">
           <div class="proc-ghost" aria-hidden="true">02</div>
           <div class="proc-step-id">PROC-002 // DELIVER</div>
@@ -1661,7 +1756,7 @@
 
     <div class="ind-grid">
       <div class="ind-card">
-        <img src="Automotive%20Restoration.png" alt="Laser cleaning a classic car frame" class="ind-img">
+        <img src="Automotive%20Restoration.png" alt="Laser cleaning a classic car frame" class="ind-img" loading="lazy">
         <div class="ind-class">CLASS IND-001</div>
         <div class="ind-name">Automotive Restoration</div>
         <p class="ind-desc">Strip frames, panels, and components to bare metal without warping thin sheet metal.</p>
@@ -1714,7 +1809,7 @@
       <p class="sec-sub" style="margin-top:-2rem">We respond to all quote requests within one business day. Same-week service available for most Fort Wayne area jobs.</p>
 
       <div class="shop-img-block">
-        <img src="Shop%20Interior.png" alt="TD Laser Pro shop interior with laser cleaning machine and workbench">
+        <img src="Shop%20Interior.png" alt="TD Laser Pro shop interior with laser cleaning machine and workbench" loading="lazy">
         <div class="shop-img-block-label">SHOP // FORT WAYNE, IN // WALK-INS WELCOME</div>
       </div>
 
@@ -2080,22 +2175,144 @@
       }
     })();
 
-    // ── 8. BACK TO TOP ───────────────────────────────────────────────
+    // ── 8. HERO PARTICLE SYSTEM ──────────────────────────────────────
     ;(function () {
-      const btn = document.getElementById('back-to-top');
-      if (!btn) return;
+      const canvas = document.getElementById('hero-particles');
+      if (!canvas) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-      window.addEventListener('scroll', () => {
-        btn.classList.toggle('visible', window.scrollY > 200);
+      const ctx = canvas.getContext('2d');
+
+      // 4 blues : 1 amber → ~20 % amber sparks
+      const PALETTE = ['#5AABFF', '#5AABFF', '#5AABFF', '#5AABFF', '#FDCF42'];
+      const MAX = 120;
+
+      let W, H, raf = null, prev = 0, particles = [];
+
+      // Sync canvas pixels to CSS layout size (no HiDPI scaling — fine for tiny circles)
+      function resize() {
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      }
+
+      // Factory: spawn position biased toward the bottom via squared uniform.
+      // When u = rand*rand ≈ 0 (frequent): y ≈ H.  When u ≈ 1 (rare): y ≈ 0.12H.
+      function make() {
+        const u = Math.random() * Math.random();
+        return {
+          x:   Math.random() * W,
+          y:   H - u * H * 0.88,
+          r:   0.5 + Math.random(),               // radius 0.5–1.5 → diameter 1–3 px
+          vx:  (Math.random() - 0.5) * 0.30,      // gentle horizontal drift
+          vy:  -(0.30 + Math.random() * 0.70),    // upward velocity
+          age: 0,
+          ttl: 90 + Math.random() * 130,          // lifespan in 60 fps frame-equivalents
+          col: PALETTE[(Math.random() * 5) | 0],
+        };
+      }
+
+      function tick(now) {
+        raf = requestAnimationFrame(tick);
+
+        // Delta time, normalised to 60 fps so speed is refresh-rate independent
+        const dt = Math.min((now - prev) / 16.667, 3);
+        prev = now;
+
+        ctx.clearRect(0, 0, W, H);
+
+        // Spawn 1–3 particles per frame when below the cap
+        const burst = 1 + ((Math.random() * 3) | 0);
+        for (let i = 0; i < burst && particles.length < MAX; i++) {
+          particles.push(make());
+        }
+
+        const live = [];
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.age += dt;
+          if (p.age >= p.ttl || p.y < -p.r) continue; // expired or off-canvas
+
+          p.y += p.vy * dt;
+          p.x += (p.vx + (Math.random() - 0.5) * 0.12) * dt; // vx + slight per-frame jitter
+
+          ctx.globalAlpha = (1 - p.age / p.ttl) * 0.88; // fade out as particle rises
+          ctx.fillStyle   = p.col;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+          ctx.fill();
+          live.push(p);
+        }
+
+        particles = live;
+        ctx.globalAlpha = 1;
+      }
+
+      function start() {
+        if (!raf) { prev = performance.now(); raf = requestAnimationFrame(tick); }
+      }
+      function stop() {
+        if (raf) { cancelAnimationFrame(raf); raf = null; }
+      }
+
+      // Pause / resume with tab visibility
+      document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+
+      // Debounced resize — re-sample canvas dimensions
+      let rid;
+      window.addEventListener('resize', () => {
+        clearTimeout(rid);
+        rid = setTimeout(resize, 100);
       }, { passive: true });
 
-      btn.addEventListener('click', () => {
-        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
-      });
+      resize();
+      start();
+    })();
+
+    // ── 9. SCROLL PROGRESS BAR ───────────────────────────────────────
+    ;(function () {
+      const bar = document.getElementById('scroll-progress');
+      if (!bar) return;
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const scrolled  = window.scrollY;
+          const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+          bar.style.width = (scrollable > 0 ? (scrolled / scrollable) * 100 : 0) + '%';
+          ticking = false;
+        });
+      }, { passive: true });
+    })();
+
+    // ── 10. BACK TO TOP + CALL BUTTON ────────────────────────────────
+    ;(function () {
+      const backBtn = document.getElementById('back-to-top');
+      const callBtn = document.getElementById('call-btn');
+
+      function syncVisibility() {
+        const show = window.scrollY > 200;
+        if (backBtn) backBtn.classList.toggle('visible', show);
+        if (callBtn) callBtn.classList.toggle('visible', show);
+      }
+
+      window.addEventListener('scroll', syncVisibility, { passive: true });
+
+      if (backBtn) {
+        backBtn.addEventListener('click', () => {
+          const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+        });
+      }
     })();
   </script>
 
+  <a href="tel:+12605550100" class="call-btn" id="call-btn" aria-label="Call TD Laser Pro now">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17.92z"/>
+    </svg>
+    <span class="call-btn-text">CALL NOW</span>
+  </a>
   <button class="back-to-top" id="back-to-top" aria-label="Back to top">&#8593;</button>
 
 </body>
